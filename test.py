@@ -1,6 +1,11 @@
+class utils:
+    h5 = None
+    pc = None
+    server = None
+    
+    def say_hi(self):
+        print(f"大家好，我是方法执行{self.h5}")
 
-from modeltest  import modle_1
-
-modle_1(1,2)
-
- 
+ut = utils()
+ut.h5 = 'webview-jsbridge'
+ut.say_hi()
