@@ -23,7 +23,7 @@ def main():
     height, width, _ = img.shape # 获取图像高度、宽度和通道数（RGB图像通道数为3）
 
     fourcc = cv2.VideoWriter_fourcc(*'mp4v') # 定义编解码格式
-    video = cv2.VideoWriter('output.mp4', fourcc, 24.89, (width,height)) # 创建视频写入器，10.0是帧率，(width, height)是视频分辨率
+    video = cv2.VideoWriter('output.mp4', fourcc, 30.0, (width,height)) # 创建视频写入器，10.0是帧率，(width, height)是视频分辨率
 
     for img_name in filter_img_list:
         img_path = os.path.join(path, img_name) # 获取图像文件路径
