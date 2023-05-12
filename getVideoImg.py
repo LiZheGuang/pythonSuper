@@ -5,7 +5,7 @@ import os
 folder_path = "/Users/mac/Desktop/frames/"
 
 # 读取视频
-cap = cv2.VideoCapture('/Users/mac/Downloads/00001.mp4')
+cap = cv2.VideoCapture('/Users/mac/Downloads/589C747F-E2E6-49E0-9299-6AF4CAB00F49.mp4')
 
 # 获取帧速率
 fps = int(cap.get(cv2.CAP_PROP_FPS))
