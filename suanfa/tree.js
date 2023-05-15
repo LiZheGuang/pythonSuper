@@ -55,10 +55,10 @@ const data = [
   },
 ];
 
-function treeBuild(data, pid = 0) {
-  return data
+function buildTree(arrs, pid = 0) {
+  return arrs
     .filter((item) => item.pid === pid)
-    .map((item) => ({ ...item, next: treeBuild(data, item.id) }));
+    .map((item) => ({ ...item, next: buildTree(arrs, item.id) }));
 }
 
-console.log(treeBuild(data, 0));
+console.log(buildTree(data, 0));
