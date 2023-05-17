@@ -1,36 +1,11 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Text to Speech</title>
-</head>
-<body>
-    <h1>Text to Speech</h1>
-    <div>
-        <textarea id="textarea"></textarea>
-    </div>
-    <div>
-        <button id="speak-btn">Speak</button>
-    </div>
-
-    <script>
-    const speakBtn = document.getElementById('speak-btn');
-    const textarea = document.getElementById('textarea');
-
-    // 创建 SpeechSynthesis 实例
-    const synth = window.speechSynthesis;
-
-    const speak = () => {
-        // 创建新的 SpeechSynthesisUtterance 实例，并设置相关属性
-        const utterance = new SpeechSynthesisUtterance(textarea.value);
-        utterance.rate = 0.8; // 设置语速为 1.5x （可选）
-
-        // 播放文本语音
-        synth.speak(utterance);
-    };
-
-    // 单击 Speak 按钮调用 speak 函数
-    speakBtn.addEventListener('click', speak);
-
-    </script>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test javascript</title>
+  </head>
+  <body></body>
+  <script type="module" src="./suanfa/test.js"></script>
 </html>
