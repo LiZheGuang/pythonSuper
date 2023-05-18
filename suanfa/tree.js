@@ -55,8 +55,10 @@ const data = [
   },
 ];
 
-function buildTree(data,pid=0){
-  return data.filter(item => item.pid == pid).map(item=>({...item,next:buildTree(data,item.id)}))
+function buildTree(data, pid = 0) {
+  return data
+    .filter((item) => item.pid === pid)
+    .map((item) => ({ ...item, next: buildTree(data, item.id) }));
 }
 
-console.log(buildTree(data,0))
+console.log(buildTree(data, 0));

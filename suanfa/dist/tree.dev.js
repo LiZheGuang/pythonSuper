@@ -58,7 +58,7 @@ var data = [{
 function buildTree(data) {
   var pid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
   return data.filter(function (item) {
-    return item.pid == pid;
+    return item.pid === pid;
   }).map(function (item) {
     return _objectSpread({}, item, {
       next: buildTree(data, item.id)

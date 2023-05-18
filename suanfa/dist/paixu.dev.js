@@ -10,7 +10,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var datas = [1, 2, 5, 4, 3, 8, 9, 0, 9, 9, 12];
 
-function lastDatas(arrs) {
+function lastData(arrs) {
   var left = 0,
       right = arrs.length - 1;
 
@@ -23,42 +23,13 @@ function lastDatas(arrs) {
   }
 
   return arrs;
-} // console.log(lastDatas(datas))
-// 快排
+} // console.log(lastData(datas))
+// maopao
 
 
-function sortSuper(arrs) {
-  if (arrs.length < 2) {
-    return arrs;
-  }
-
-  var left = [],
-      right = [],
-      provide = Math.floor(arrs.length - 1 / 2),
-      provideItem = arrs[provide];
-
-  for (var i = 0; i < arrs.length; i++) {
-    if (i === provide) {
-      continue;
-    }
-
-    if (arrs[i] < provideItem) {
-      left.push(arrs[i]);
-    } else {
-      right.push(arrs[i]);
-    }
-  }
-
-  return [].concat(_toConsumableArray(sortSuper(left)), [provideItem], _toConsumableArray(sortSuper(right)));
-} // console.log(sortSuper(datas));
-// 冒泡
-
-
-function SortTop(arrs) {
+function sort(arrs) {
   for (var i = 0; i < arrs.length - 1; i++) {
     for (var j = 0; j < arrs.length - i - 1; j++) {
-      console.log(j);
-
       if (arrs[j] > arrs[j + 1]) {
         var temp = arrs[j];
         arrs[j] = arrs[j + 1];
@@ -68,6 +39,31 @@ function SortTop(arrs) {
   }
 
   return arrs;
+} // console.log(sort(datas))
+// kuaipai
+
+
+function sortSuper(arrs) {
+  if (arrs.length < 2) {
+    return arrs;
+  }
+
+  var left = [],
+      right = [],
+      provide = Math.floor(arrs.length / 2),
+      provideItem = arrs[provide];
+
+  for (var i = 0; i < arrs.length; i++) {
+    if (i === provide) continue;
+
+    if (arrs[i] < provideItem) {
+      left.push(arrs[i]);
+    } else {
+      right.push(arrs[i]);
+    }
+  }
+
+  return [].concat(_toConsumableArray(sortSuper(left)), [provideItem], _toConsumableArray(sortSuper(right)));
 }
 
-console.log(SortTop(datas));
+console.log(sortSuper(datas));
