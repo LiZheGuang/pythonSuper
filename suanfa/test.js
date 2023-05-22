@@ -48,19 +48,22 @@ function longestSubstring(s) {
   return ans;
 }
 
+
 function longsrtString(s) {
   let n = s.length;
   let set = new Set();
   let ans = 0;
+
   for (let i = 0, j = 0; j < n; j++) {
-    while (set.has(s[j])) {
-      set.delete(s[i]);
-      i++;
+    while(set.has(s[j])){
+      set.delete(s[i])
+      i++
     }
-    set.add(s[j]);
-    ans = Math.max(ans, j - i + 1); // 更新答案
+    set.add(s[j])
+    ans = Math.max(ans,j - i + 1)
   }
-  console.log(set);
+
   return ans;
 }
-console.log(longsrtString("abcdsjdjxhdurxdf"));
+
+console.log(longsrtString('jdkalsjdklasxnsahdsajkh'))

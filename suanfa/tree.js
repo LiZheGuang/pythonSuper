@@ -57,7 +57,9 @@ const data = [
 
 function buildTree(data, pid = 0) {
   return data
-    .filter((item) => item.pid === pid)
+    .filter((item) => {
+    return  item.pid === pid;
+    })
     .map((item) => ({ ...item, next: buildTree(data, item.id) }));
 }
 

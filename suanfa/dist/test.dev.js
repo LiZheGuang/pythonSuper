@@ -60,11 +60,10 @@ function longsrtString(s) {
     }
 
     set.add(s[j]);
-    ans = Math.max(ans, j - i + 1); // 更新答案
+    ans = Math.max(ans, j - i + 1);
   }
 
-  console.log(set);
   return ans;
 }
 
-console.log(longsrtString("abcdsjdjxhdurxdf"));
+console.log(longsrtString('jdkalsjdklasxnsahdsajkh'));

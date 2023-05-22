@@ -1,57 +1,74 @@
 var datas = [1, 2, 5, 4, 3, 8, 9, 0, 9, 9, 12];
 
-function lastData(arrs) {
+function lastData(data) {
   let left = 0,
-    right = arrs.length - 1;
+    right = data.length - 1;
 
   while (left < right) {
-    let temp = arrs[left];
-    arrs[left] = arrs[right];
-    arrs[right] = temp;
+    const temp = data[left];
+    data[left] = data[right];
+    data[right] = temp;
     left++;
     right--;
   }
-  return arrs;
+
+  return data;
 }
+// console.log(lastData(datas));
 
-// console.log(lastData(datas))
+// 冒泡
 
-// maopao
-function sort(arrs) {
-  for (let i = 0; i < arrs.length - 1; i++) {
-    for (let j = 0; j < arrs.length - i - 1; j++) {
-      if (arrs[j] > arrs[j + 1]) {
-        let temp = arrs[j];
-        arrs[j] = arrs[j + 1];
-        arrs[j + 1] = temp;
+function sort(data) {
+  for (let i = 0; i < data.length - 1; i++) {
+    for (let j = 0; j < data.length - i - 1; j++) {
+      if (data[j] > data[j + 1]) {
+        let temp = data[j];
+        data[j] = data[j + 1];
+        data[j + 1] = temp;
       }
     }
   }
-  return arrs;
+  return data;
 }
-
 // console.log(sort(datas))
 
-// kuaipai
+// 快速排序
 
-function sortSuper(arrs) {
-  if (arrs.length < 2) {
-    return arrs;
+function sortSuper(data) {
+  if (data.length < 2) {
+    return data;
   }
   let left = [],
     right = [],
-    provide = Math.floor(arrs.length / 2),
-    provideItem = arrs[provide];
+    provide = Math.floor(data.length / 2),
+    provideItem = data[provide];
+  for (let i = 0; i < data.length; i++) {
+    if (i === provide) {
+      continue;
+    }
 
-  for (let i = 0; i < arrs.length; i++) {
-    if (i === provide) continue;
-    if (arrs[i] < provideItem) {
-      left.push(arrs[i]);
+    if (data[i] < provideItem) {
+      left.push(data[i]);
     } else {
-      right.push(arrs[i]);
+      right.push(data[i]);
     }
   }
   return [...sortSuper(left), provideItem, ...sortSuper(right)];
 }
 
-console.log(sortSuper(datas));
+// console.log(sortSuper(datas))
+
+function superMap(arrs, callback) {
+  let resulet = [];
+  for (let i = 0; i < arrs.length; i++) {
+    resulet.push(callback(arrs[i], i));
+  }
+
+  return resulet;
+}
+
+let ns = superMap([1, 2, 3, 4], function (item) {
+  return item + "hhaha";
+});
+// console.log(ns)
+
