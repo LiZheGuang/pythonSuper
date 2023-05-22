@@ -1,4 +1,7 @@
 var datas = [1, 2, 5, 4, 3, 8, 9, 0, 9, 9, 12];
+// 两数之和练习
+
+var nums = [2, 7, 11, 15]; //https://leetcode.cn/problems/two-sum/
 
 function lastData(data) {
   let left = 0,
@@ -72,3 +75,30 @@ let ns = superMap([1, 2, 3, 4], function (item) {
 });
 // console.log(ns)
 
+var toSum = function (nums, target) {
+  var valToIndex = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    var need = target - nums[i];
+    console.log(need);
+    valToIndex.set(nums[i], i);
+    if (valToIndex.has(need)) {
+      return [valToIndex.get(need), i];
+    }
+  }
+  console.log(valToIndex);
+
+  return null;
+};
+
+var toSum = function (arrs, target) {
+  var valToIndex = new Map();
+  for (let i = 0; i < arrs.length; i++) {
+    var need = target - arrs[i];
+    valToIndex.set(arrs[i], i);
+    if (valToIndex.has(need)) {
+      return [valToIndex.get(need), i];
+    }
+  }
+  return null
+};
+console.log(toSum(nums, 13));

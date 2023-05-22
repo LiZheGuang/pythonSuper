@@ -8,7 +8,9 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-var datas = [1, 2, 5, 4, 3, 8, 9, 0, 9, 9, 12];
+var datas = [1, 2, 5, 4, 3, 8, 9, 0, 9, 9, 12]; // 两数之和练习
+
+var nums = [2, 7, 11, 15]; //https://leetcode.cn/problems/two-sum/
 
 function lastData(data) {
   var left = 0,
@@ -82,3 +84,37 @@ function superMap(arrs, callback) {
 var ns = superMap([1, 2, 3, 4], function (item) {
   return item + "hhaha";
 }); // console.log(ns)
+
+var toSum = function toSum(nums, target) {
+  var valToIndex = new Map();
+
+  for (var i = 0; i < nums.length; i++) {
+    var need = target - nums[i];
+    console.log(need);
+    valToIndex.set(nums[i], i);
+
+    if (valToIndex.has(need)) {
+      return [valToIndex.get(need), i];
+    }
+  }
+
+  console.log(valToIndex);
+  return null;
+};
+
+var toSum = function toSum(arrs, target) {
+  var valToIndex = new Map();
+
+  for (var i = 0; i < arrs.length; i++) {
+    var need = target - arrs[i];
+    valToIndex.set(arrs[i], i);
+
+    if (valToIndex.has(need)) {
+      return [valToIndex.get(need), i];
+    }
+  }
+
+  return null;
+};
+
+console.log(toSum(nums, 13));
