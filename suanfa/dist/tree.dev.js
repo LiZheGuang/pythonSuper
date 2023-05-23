@@ -54,6 +54,7 @@ var data = [{
   pid: 6,
   title: "增加学生"
 }];
+var arrsSpilit = [1, [2, [3, 4], 5], 6];
 
 function buildTree(data) {
   var pid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
@@ -67,3 +68,11 @@ function buildTree(data) {
 }
 
 console.log(buildTree(data, 0));
+
+function filterArrs(arrs) {
+  return arrs.reduce(function (last, val) {
+    return Array.isArray(val) ? last.concat(filterArrs(val)) : last.concat(val);
+  }, []);
+}
+
+console.log(filterArrs(arrsSpilit));

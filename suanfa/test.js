@@ -66,4 +66,4 @@ function longsrtString(s) {
   return ans;
 }
 
-console.log(longsrtString('jdkalsjdklasxnsahdsajkh'))
+// 两数之和练习

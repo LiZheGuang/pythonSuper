@@ -55,12 +55,18 @@ const data = [
   },
 ];
 
+const arrsSpilit = [1, [2, [3, 4], 5], 6];
+
 function buildTree(data, pid = 0) {
-  return data
-    .filter((item) => {
-    return  item.pid === pid;
-    })
-    .map((item) => ({ ...item, next: buildTree(data, item.id) }));
+  return data.filter(item=> item.pid === pid).map(item=>({...item,next:buildTree(data,item.id)}))
 }
 
 console.log(buildTree(data, 0));
+
+function filterArrs (arrs){
+  return arrs.reduce((last,val)=>{
+    return Array.isArray(val) ? last.concat(filterArrs(val)) : last.concat(val)
+  },[])
+}
+
+console.log(filterArrs(arrsSpilit))

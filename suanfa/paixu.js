@@ -6,15 +6,13 @@ var nums = [2, 7, 11, 15]; //https://leetcode.cn/problems/two-sum/
 function lastData(data) {
   let left = 0,
     right = data.length - 1;
-
   while (left < right) {
-    const temp = data[left];
+    let temp = data[left];
     data[left] = data[right];
     data[right] = temp;
     left++;
     right--;
   }
-
   return data;
 }
 // console.log(lastData(datas));
@@ -41,22 +39,21 @@ function sortSuper(data) {
   if (data.length < 2) {
     return data;
   }
-  let left = [],
-    right = [],
-    provide = Math.floor(data.length / 2),
-    provideItem = data[provide];
+  let left = [];
+  let right = [];
+  let proIndex = Math.floor(data.length / 2);
+  let pronums = data[proIndex];
   for (let i = 0; i < data.length; i++) {
-    if (i === provide) {
-      continue;
+    if(i === proIndex){
+      continue
     }
-
-    if (data[i] < provideItem) {
-      left.push(data[i]);
-    } else {
-      right.push(data[i]);
+    if(data[i] < pronums){
+      left.push(data[i])
+    }else{
+      right.push(data[i])
     }
   }
-  return [...sortSuper(left), provideItem, ...sortSuper(right)];
+  return [...sortSuper(left),pronums,...sortSuper(right)]
 }
 
 // console.log(sortSuper(datas))
@@ -76,29 +73,16 @@ let ns = superMap([1, 2, 3, 4], function (item) {
 // console.log(ns)
 
 var toSum = function (nums, target) {
-  var valToIndex = new Map();
-  for (let i = 0; i < nums.length; i++) {
-    var need = target - nums[i];
-    console.log(need);
-    valToIndex.set(nums[i], i);
-    if (valToIndex.has(need)) {
-      return [valToIndex.get(need), i];
-    }
-  }
-  console.log(valToIndex);
-
-  return null;
-};
-
-var toSum = function (arrs, target) {
-  var valToIndex = new Map();
-  for (let i = 0; i < arrs.length; i++) {
-    var need = target - arrs[i];
-    valToIndex.set(arrs[i], i);
-    if (valToIndex.has(need)) {
-      return [valToIndex.get(need), i];
-    }
+  var maps = new Map()
+  for(let i = 0 ;i < nums.length;i++){
+    let need = target - nums[i]
+      if(maps.has(need)){
+        return [maps.get(need),i]
+      }
+      maps.set(nums[i],i)
   }
   return null
 };
+
+
 console.log(toSum(nums, 13));

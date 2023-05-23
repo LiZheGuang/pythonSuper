@@ -50,24 +50,24 @@ function sortSuper(data) {
     return data;
   }
 
-  var left = [],
-      right = [],
-      provide = Math.floor(data.length / 2),
-      provideItem = data[provide];
+  var left = [];
+  var right = [];
+  var proIndex = Math.floor(data.length / 2);
+  var pronums = data[proIndex];
 
   for (var i = 0; i < data.length; i++) {
-    if (i === provide) {
+    if (i === proIndex) {
       continue;
     }
 
-    if (data[i] < provideItem) {
+    if (data[i] < pronums) {
       left.push(data[i]);
     } else {
       right.push(data[i]);
     }
   }
 
-  return [].concat(_toConsumableArray(sortSuper(left)), [provideItem], _toConsumableArray(sortSuper(right)));
+  return [].concat(_toConsumableArray(sortSuper(left)), [pronums], _toConsumableArray(sortSuper(right)));
 } // console.log(sortSuper(datas))
 
 
@@ -86,32 +86,16 @@ var ns = superMap([1, 2, 3, 4], function (item) {
 }); // console.log(ns)
 
 var toSum = function toSum(nums, target) {
-  var valToIndex = new Map();
+  var maps = new Map();
 
   for (var i = 0; i < nums.length; i++) {
     var need = target - nums[i];
-    console.log(need);
-    valToIndex.set(nums[i], i);
 
-    if (valToIndex.has(need)) {
-      return [valToIndex.get(need), i];
+    if (maps.has(need)) {
+      return [maps.get(need), i];
     }
-  }
 
-  console.log(valToIndex);
-  return null;
-};
-
-var toSum = function toSum(arrs, target) {
-  var valToIndex = new Map();
-
-  for (var i = 0; i < arrs.length; i++) {
-    var need = target - arrs[i];
-    valToIndex.set(arrs[i], i);
-
-    if (valToIndex.has(need)) {
-      return [valToIndex.get(need), i];
-    }
+    maps.set(nums[i], i);
   }
 
   return null;
