@@ -101,4 +101,50 @@ var toSum = function toSum(nums, target) {
   return null;
 };
 
-console.log(toSum(nums, 13));
+console.log(toSum(nums, 13)); // 双指针 tosum
+
+function tosumleftright(args, target) {
+  var left = 0,
+      right = args.length - 1;
+
+  while (left < right) {
+    var sum = args[left] + args[right];
+
+    if (sum === target) {
+      return [left, right];
+    } else if (sum > target) {
+      right--;
+    } else {
+      left++;
+    }
+  }
+
+  return [];
+} // console.log(tosumleftright(nums,9))
+
+
+function findTwo(arrs, target) {
+  var left = 0;
+  var right = arrs.length - 1;
+
+  while (left <= right) {
+    var mid = Math.floor((left + right) / 2);
+    console.log({
+      mid: mid,
+      left: left,
+      right: right
+    });
+
+    if (arrs[mid] === target) {
+      return mid;
+    } else if (arrs[mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  return -1;
+}
+
+console.log(findTwo(datas, 100));

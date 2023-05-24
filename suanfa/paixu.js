@@ -44,16 +44,16 @@ function sortSuper(data) {
   let proIndex = Math.floor(data.length / 2);
   let pronums = data[proIndex];
   for (let i = 0; i < data.length; i++) {
-    if(i === proIndex){
-      continue
+    if (i === proIndex) {
+      continue;
     }
-    if(data[i] < pronums){
-      left.push(data[i])
-    }else{
-      right.push(data[i])
+    if (data[i] < pronums) {
+      left.push(data[i]);
+    } else {
+      right.push(data[i]);
     }
   }
-  return [...sortSuper(left),pronums,...sortSuper(right)]
+  return [...sortSuper(left), pronums, ...sortSuper(right)];
 }
 
 // console.log(sortSuper(datas))
@@ -73,16 +73,56 @@ let ns = superMap([1, 2, 3, 4], function (item) {
 // console.log(ns)
 
 var toSum = function (nums, target) {
-  var maps = new Map()
-  for(let i = 0 ;i < nums.length;i++){
-    let need = target - nums[i]
-      if(maps.has(need)){
-        return [maps.get(need),i]
-      }
-      maps.set(nums[i],i)
+  var maps = new Map();
+  for (let i = 0; i < nums.length; i++) {
+    let need = target - nums[i];
+    if (maps.has(need)) {
+      return [maps.get(need), i];
+    }
+    maps.set(nums[i], i);
   }
-  return null
+  return null;
 };
 
-
 console.log(toSum(nums, 13));
+
+// 双指针 tosum
+
+function tosumleftright(args, target) {
+  let left = 0,
+    right = args.length - 1;
+  while (left < right) {
+    let sum = args[left] + args[right];
+    if (sum === target) {
+      return [left, right];
+    } else if (sum > target) {
+      right--;
+    } else {
+      left++;
+    }
+  }
+  return [];
+}
+
+// console.log(tosumleftright(nums,9))
+
+function findTwo(arrs, target) {
+  let left = 0;
+  let right = arrs.length - 1;
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    console.log({
+      mid,left,right
+    })
+    if (arrs[mid] === target) {
+      return mid;
+    } else if (arrs[mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+  return -1
+}
+
+console.log(findTwo(datas,100))

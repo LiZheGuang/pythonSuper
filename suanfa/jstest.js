@@ -8,7 +8,7 @@
 //   return result;
 // };
 
-Function.printNums.call2 = function (context, ...args) {
+Function.prototype.call2 = function (context, ...args) {
   context = context || window;
   context.fn = this;
   const resulet = context.fn(...args);
@@ -41,11 +41,18 @@ function printNums() {
 
 const duowei_arrs = [1, [2, [3, 4], 5], 6];
 
-function flatten(arrs) {
-  let all = [];
-  let flattenedArray = arrs.reduce((acc, val) => {
-    return Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val);
-  }, []);
-  return flattenedArray;
+// function flatten(arrs) {
+//   let flattenedArray = arrs.reduce((acc, val) => {
+//     return Array.isArray(val) ? acc.concat(flatten(val)) : acc.concat(val);
+//   }, []);
+//   return flattenedArray;
+// }
+
+function testnnn(arrs) {
+  let ns = arrs.reduce((last,val)=>{
+    return Array.isArray(val) ? last.concat(testnnn(val)) : last.concat(val)
+  },[])
+  return ns
 }
-console.log(flatten(duowei_arrs));
+
+console.log(testnnn(duowei_arrs));
