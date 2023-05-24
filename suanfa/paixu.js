@@ -3,69 +3,69 @@ var datas = [1, 2, 5, 4, 3, 8, 9, 0, 9, 9, 12];
 
 var nums = [2, 7, 11, 15]; //https://leetcode.cn/problems/two-sum/
 
-function lastData(data) {
+function lastData(arrs) {
   let left = 0,
-    right = data.length - 1;
+    right = arrs.length - 1;
   while (left < right) {
-    let temp = data[left];
-    data[left] = data[right];
-    data[right] = temp;
+    let temp = arrs[left];
+    arrs[left] = arrs[right];
+    arrs[right] = temp;
     left++;
     right--;
   }
-  return data;
+  return arrs;
 }
 // console.log(lastData(datas));
 
 // 冒泡
 
-function sort(data) {
-  for (let i = 0; i < data.length - 1; i++) {
-    for (let j = 0; j < data.length - i - 1; j++) {
-      if (data[j] > data[j + 1]) {
-        let temp = data[j];
-        data[j] = data[j + 1];
-        data[j + 1] = temp;
+function sort(arrs) {
+  for (let i = 0; i < arrs.length - 1; i++) {
+    for (let j = 0; j < arrs.length - i - 1; j++) {
+      if (arrs[j] > arrs[j + 1]) {
+        let temp = arrs[j];
+        arrs[j] = arrs[j + 1];
+        arrs[j + 1] = temp;
       }
     }
   }
-  return data;
+  return arrs;
 }
-// console.log(sort(datas))
-
+// console.log(sort(datas));
+//
 // 快速排序
 
-function sortSuper(data) {
-  if (data.length < 2) {
-    return data;
+function sortSuper(arrs) {
+  if (arrs.length < 2) {
+    return arrs;
   }
-  let left = [];
-  let right = [];
-  let proIndex = Math.floor(data.length / 2);
-  let pronums = data[proIndex];
-  for (let i = 0; i < data.length; i++) {
-    if (i === proIndex) {
+  let left = [],
+    right = [],
+    preCenter = Math.floor(arrs.length / 2);
+  preNum = arrs[preCenter];
+
+  for (let i = 0; i < arrs.length; i++) {
+    if (preCenter === i) {
       continue;
     }
-    if (data[i] < pronums) {
-      left.push(data[i]);
+    if (arrs[i] < preNum) {
+      left.push(arrs[i]);
     } else {
-      right.push(data[i]);
+      right.push(arrs[i]);
     }
   }
-  return [...sortSuper(left), pronums, ...sortSuper(right)];
+  return [...sortSuper(left), preNum, ...sortSuper(right)];
 }
 
 // console.log(sortSuper(datas))
-
 function superMap(arrs, callback) {
-  let resulet = [];
+  let result = [];
   for (let i = 0; i < arrs.length; i++) {
-    resulet.push(callback(arrs[i], i));
+    result.push(callback(arrs[i], i));
   }
-
-  return resulet;
+  return result;
 }
+// 写一个MAP函数
 
 let ns = superMap([1, 2, 3, 4], function (item) {
   return item + "hhaha";
@@ -73,7 +73,7 @@ let ns = superMap([1, 2, 3, 4], function (item) {
 // console.log(ns)
 
 var toSum = function (nums, target) {
-  var maps = new Map();
+  let maps = new Map();
   for (let i = 0; i < nums.length; i++) {
     let need = target - nums[i];
     if (maps.has(need)) {
@@ -84,7 +84,7 @@ var toSum = function (nums, target) {
   return null;
 };
 
-console.log(toSum(nums, 13));
+// console.log(toSum(nums, 13));
 
 // 双指针 tosum
 
@@ -110,19 +110,16 @@ function findTwo(arrs, target) {
   let left = 0;
   let right = arrs.length - 1;
   while (left <= right) {
-    let mid = Math.floor((left + right) / 2);
-    console.log({
-      mid,left,right
-    })
+    let mid = Math.floor((right + left) / 2);
+    console.log(left,right)
     if (arrs[mid] === target) {
-      return mid;
+      return mid
     } else if (arrs[mid] < target) {
-      left = mid + 1;
+      left = mid+1;
     } else {
-      right = mid - 1;
+      right = mid-1;
     }
   }
-  return -1
+  return  null;
 }
-
-console.log(findTwo(datas,100))
+console.log(findTwo(nums, 2));

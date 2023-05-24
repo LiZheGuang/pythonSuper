@@ -18,10 +18,10 @@ Function.prototype.call2 = function (context) {
     args[_key - 1] = arguments[_key];
   }
 
-  var resulet = (_context = context).fn.apply(_context, args);
+  var result = (_context = context).fn.apply(_context, args);
 
   delete context.fn;
-  return resulet;
+  return result;
 };
 
 var obj = {
@@ -35,18 +35,18 @@ function sayHi(age, gender) {
 
 
 function printNums() {
-  var i = 1;
-  var intestTimeis = setInterval(function () {
-    console.log(i);
+  var i = 0;
+  var times = setInterval(function () {
     i++;
+    console.log(i);
 
-    if (i > 5) {
-      clearInterval(intestTimeis);
+    if (i >= 5) {
+      clearInterval(times);
     }
   }, 1000);
-} // printNums()
-// JS多维数组 转为一维数组
+}
 
+printNums(); // JS多维数组 转为一维数组
 
 var duowei_arrs = [1, [2, [3, 4], 5], 6]; // function flatten(arrs) {
 //   let flattenedArray = arrs.reduce((acc, val) => {

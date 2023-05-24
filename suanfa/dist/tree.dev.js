@@ -56,22 +56,22 @@ var data = [{
 }];
 var arrsSpilit = [1, [2, [3, 4], 5], 6];
 
-function buildTree(data) {
+function buildTree(arrs) {
   var pid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  return data.filter(function (item) {
+  return arrs.filter(function (item) {
     return item.pid === pid;
   }).map(function (item) {
     return _objectSpread({}, item, {
-      next: buildTree(data, item.id)
+      next: buildTree(arrs, item.id)
     });
   });
-}
+} // console.log(buildTree(data, 0));
+// reduce拍平多维数组
 
-console.log(buildTree(data, 0));
 
 function filterArrs(arrs) {
-  return arrs.reduce(function (last, val) {
-    return Array.isArray(val) ? last.concat(filterArrs(val)) : last.concat(val);
+  return arrs.reduce(function (pre, val) {
+    return Array.isArray(val) ? pre.concat(filterArrs(val)) : pre.concat(val);
   }, []);
 }
 

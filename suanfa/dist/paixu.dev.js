@@ -12,74 +12,76 @@ var datas = [1, 2, 5, 4, 3, 8, 9, 0, 9, 9, 12]; // 两数之和练习
 
 var nums = [2, 7, 11, 15]; //https://leetcode.cn/problems/two-sum/
 
-function lastData(data) {
+function lastData(arrs) {
   var left = 0,
-      right = data.length - 1;
+      right = arrs.length - 1;
 
   while (left < right) {
-    var temp = data[left];
-    data[left] = data[right];
-    data[right] = temp;
+    var temp = arrs[left];
+    arrs[left] = arrs[right];
+    arrs[right] = temp;
     left++;
     right--;
   }
 
-  return data;
+  return arrs;
 } // console.log(lastData(datas));
 // 冒泡
 
 
-function sort(data) {
-  for (var i = 0; i < data.length - 1; i++) {
-    for (var j = 0; j < data.length - i - 1; j++) {
-      if (data[j] > data[j + 1]) {
-        var temp = data[j];
-        data[j] = data[j + 1];
-        data[j + 1] = temp;
+function sort(arrs) {
+  for (var i = 0; i < arrs.length - 1; i++) {
+    for (var j = 0; j < arrs.length - i - 1; j++) {
+      if (arrs[j] > arrs[j + 1]) {
+        var temp = arrs[j];
+        arrs[j] = arrs[j + 1];
+        arrs[j + 1] = temp;
       }
     }
   }
 
-  return data;
-} // console.log(sort(datas))
+  return arrs;
+} // console.log(sort(datas));
+//
 // 快速排序
 
 
-function sortSuper(data) {
-  if (data.length < 2) {
-    return data;
+function sortSuper(arrs) {
+  if (arrs.length < 2) {
+    return arrs;
   }
 
-  var left = [];
-  var right = [];
-  var proIndex = Math.floor(data.length / 2);
-  var pronums = data[proIndex];
+  var left = [],
+      right = [],
+      preCenter = Math.floor(arrs.length / 2);
+  preNum = arrs[preCenter];
 
-  for (var i = 0; i < data.length; i++) {
-    if (i === proIndex) {
+  for (var i = 0; i < arrs.length; i++) {
+    if (preCenter === i) {
       continue;
     }
 
-    if (data[i] < pronums) {
-      left.push(data[i]);
+    if (arrs[i] < preNum) {
+      left.push(arrs[i]);
     } else {
-      right.push(data[i]);
+      right.push(arrs[i]);
     }
   }
 
-  return [].concat(_toConsumableArray(sortSuper(left)), [pronums], _toConsumableArray(sortSuper(right)));
+  return [].concat(_toConsumableArray(sortSuper(left)), [preNum], _toConsumableArray(sortSuper(right)));
 } // console.log(sortSuper(datas))
 
 
 function superMap(arrs, callback) {
-  var resulet = [];
+  var result = [];
 
   for (var i = 0; i < arrs.length; i++) {
-    resulet.push(callback(arrs[i], i));
+    result.push(callback(arrs[i], i));
   }
 
-  return resulet;
-}
+  return result;
+} // 写一个MAP函数
+
 
 var ns = superMap([1, 2, 3, 4], function (item) {
   return item + "hhaha";
@@ -99,9 +101,9 @@ var toSum = function toSum(nums, target) {
   }
 
   return null;
-};
+}; // console.log(toSum(nums, 13));
+// 双指针 tosum
 
-console.log(toSum(nums, 13)); // 双指针 tosum
 
 function tosumleftright(args, target) {
   var left = 0,
@@ -128,12 +130,8 @@ function findTwo(arrs, target) {
   var right = arrs.length - 1;
 
   while (left <= right) {
-    var mid = Math.floor((left + right) / 2);
-    console.log({
-      mid: mid,
-      left: left,
-      right: right
-    });
+    var mid = Math.floor((right + left) / 2);
+    console.log(left, right);
 
     if (arrs[mid] === target) {
       return mid;
@@ -144,7 +142,7 @@ function findTwo(arrs, target) {
     }
   }
 
-  return -1;
+  return null;
 }
 
-console.log(findTwo(datas, 100));
+console.log(findTwo(nums, 2));

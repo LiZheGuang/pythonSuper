@@ -7,14 +7,14 @@
 //   delete context.fn;
 //   return result;
 // };
-
 Function.prototype.call2 = function (context, ...args) {
   context = context || window;
   context.fn = this;
-  const resulet = context.fn(...args);
+  let result = context.fn(...args);
   delete context.fn;
-  return resulet;
+  return result;
 };
+
 const obj = { name: "张三" };
 function sayHi(age, gender) {
   console.log(`我叫${this.name}，年龄：${age}，性别：${gender}`);
@@ -25,17 +25,17 @@ function sayHi(age, gender) {
 // 每隔一秒输出1,2,3,4,5
 
 function printNums() {
-  let i = 1;
-  const intestTimeis = setInterval(() => {
-    console.log(i);
-    i++;
-    if (i > 5) {
-      clearInterval(intestTimeis);
+  let i = 0;
+  let times = setInterval(() => {
+    i++
+    console.log(i)
+    if(i >=5){
+      clearInterval(times)
     }
   }, 1000);
 }
 
-// printNums()
+printNums()
 
 // JS多维数组 转为一维数组
 
@@ -49,10 +49,10 @@ const duowei_arrs = [1, [2, [3, 4], 5], 6];
 // }
 
 function testnnn(arrs) {
-  let ns = arrs.reduce((last,val)=>{
-    return Array.isArray(val) ? last.concat(testnnn(val)) : last.concat(val)
-  },[])
-  return ns
+  let ns = arrs.reduce((last, val) => {
+    return Array.isArray(val) ? last.concat(testnnn(val)) : last.concat(val);
+  }, []);
+  return ns;
 }
 
 console.log(testnnn(duowei_arrs));
