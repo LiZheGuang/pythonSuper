@@ -9,10 +9,10 @@
 // };
 Function.prototype.call2 = function (context, ...args) {
   context = context || window;
-  context.fn = this
-  let result = context.fn(...args)
-  delete context.fn
-  return result
+  context.fn = this;
+  let result = context.fn(...args);
+  delete context.fn;
+  return result;
 };
 
 const obj = { name: "张三" };
@@ -57,11 +57,11 @@ function testnnn(arrs) {
 
 // console.log(testnnn(duowei_arrs));
 
-function mapnext(arrs,callback){
-  const result = []
-  for(let i = 0 ;i<arrs.length;i++){
-    result.push(callback(arrs[i],i))
+function mapnext(arrs, callback) {
+  const result = [];
+  for (let i = 0; i < arrs.length; i++) {
+    result.push(callback(arrs[i], i));
   }
 
-  return result
+  return result;
 }
