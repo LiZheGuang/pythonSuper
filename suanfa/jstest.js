@@ -9,10 +9,10 @@
 // };
 Function.prototype.call2 = function (context, ...args) {
   context = context || window;
-  context.fn = this;
-  let result = context.fn(...args);
-  delete context.fn;
-  return result;
+  context.fn = this
+  let result = context.fn(...args)
+  delete context.fn
+  return result
 };
 
 const obj = { name: "张三" };
@@ -27,15 +27,15 @@ function sayHi(age, gender) {
 function printNums() {
   let i = 0;
   let times = setInterval(() => {
-    i++
-    console.log(i)
-    if(i >=5){
-      clearInterval(times)
+    i++;
+    console.log(i);
+    if (i >= 5) {
+      clearInterval(times);
     }
   }, 1000);
 }
 
-printNums()
+// printNums();
 
 // JS多维数组 转为一维数组
 
@@ -55,4 +55,13 @@ function testnnn(arrs) {
   return ns;
 }
 
-console.log(testnnn(duowei_arrs));
+// console.log(testnnn(duowei_arrs));
+
+function mapnext(arrs,callback){
+  const result = []
+  for(let i = 0 ;i<arrs.length;i++){
+    result.push(callback(arrs[i],i))
+  }
+
+  return result
+}

@@ -44,9 +44,9 @@ function printNums() {
       clearInterval(times);
     }
   }, 1000);
-}
+} // printNums();
+// JS多维数组 转为一维数组
 
-printNums(); // JS多维数组 转为一维数组
 
 var duowei_arrs = [1, [2, [3, 4], 5], 6]; // function flatten(arrs) {
 //   let flattenedArray = arrs.reduce((acc, val) => {
@@ -60,6 +60,15 @@ function testnnn(arrs) {
     return Array.isArray(val) ? last.concat(testnnn(val)) : last.concat(val);
   }, []);
   return ns;
-}
+} // console.log(testnnn(duowei_arrs));
 
-console.log(testnnn(duowei_arrs));
+
+function mapnext(arrs, callback) {
+  var result = [];
+
+  for (var i = 0; i < arrs.length; i++) {
+    result.push(callback(arrs[i], i));
+  }
+
+  return result;
+}

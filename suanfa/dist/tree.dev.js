@@ -58,11 +58,11 @@ var arrsSpilit = [1, [2, [3, 4], 5], 6];
 
 function buildTree(arrs) {
   var pid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  return arrs.filter(function (item) {
-    return item.pid === pid;
-  }).map(function (item) {
-    return _objectSpread({}, item, {
-      next: buildTree(arrs, item.id)
+  return arrs.filter(function (ietm) {
+    return ietm.pid == pid;
+  }).map(function (ietm) {
+    return _objectSpread({}, ietm, {
+      next: buildTree(arrs, ietm.id)
     });
   });
 } // console.log(buildTree(data, 0));

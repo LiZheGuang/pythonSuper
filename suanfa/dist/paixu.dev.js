@@ -53,22 +53,22 @@ function sortSuper(arrs) {
 
   var left = [],
       right = [],
-      preCenter = Math.floor(arrs.length / 2);
-  preNum = arrs[preCenter];
+      preIndex = Math.floor(arrs.length / 2),
+      prenum = arrs[preIndex];
 
   for (var i = 0; i < arrs.length; i++) {
-    if (preCenter === i) {
+    if (i === preIndex) {
       continue;
     }
 
-    if (arrs[i] < preNum) {
+    if (arrs[i] < prenum) {
       left.push(arrs[i]);
     } else {
       right.push(arrs[i]);
     }
   }
 
-  return [].concat(_toConsumableArray(sortSuper(left)), [preNum], _toConsumableArray(sortSuper(right)));
+  return [].concat(_toConsumableArray(sortSuper(left)), [prenum], _toConsumableArray(sortSuper(right)));
 } // console.log(sortSuper(datas))
 
 
@@ -126,23 +126,22 @@ function tosumleftright(args, target) {
 
 
 function findTwo(arrs, target) {
-  var left = 0;
-  var right = arrs.length - 1;
+  var left = 0,
+      right = arrs.length - 1;
 
   while (left <= right) {
-    var mid = Math.floor((right + left) / 2);
-    console.log(left, right);
+    var sum = arrs[left] + arrs[right];
 
-    if (arrs[mid] === target) {
-      return mid;
-    } else if (arrs[mid] < target) {
-      left = mid + 1;
+    if (sum === target) {
+      return [left, right];
+    } else if (sum < target) {
+      left++;
     } else {
-      right = mid - 1;
+      right--;
     }
   }
 
-  return null;
+  return [left, right];
 }
 
-console.log(findTwo(nums, 2));
+console.log(findTwo(nums, 9));
