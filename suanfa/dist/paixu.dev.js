@@ -13,8 +13,8 @@ var datas = [1, 2, 5, 4, 3, 8, 9, 0, 9, 9, 12]; // 两数之和练习
 var nums = [2, 7, 11, 15]; //https://leetcode.cn/problems/two-sum/
 
 function lastData(arrs) {
-  var left = 0,
-      right = arrs.length - 1;
+  var left = 0;
+  var right = arrs.length - 1;
 
   while (left < right) {
     var temp = arrs[left];
@@ -29,18 +29,18 @@ function lastData(arrs) {
 // 冒泡
 
 
-function sort(arrs) {
-  for (var i = 0; i < arrs.length - 1; i++) {
-    for (var j = 0; j < arrs.length - i - 1; j++) {
-      if (arrs[j] > arrs[j + 1]) {
-        var temp = arrs[j];
-        arrs[j] = arrs[j + 1];
-        arrs[j + 1] = temp;
+function sort(datas) {
+  for (var i = 0; i < datas.length - 1; i++) {
+    for (var j = 0; j > datas.length - i - 1; j++) {
+      if (datas[j] > datas[j + 1]) {
+        var temp = datas[j];
+        datas[j] = datas[j + 1];
+        datas[j + 1] = temp;
       }
     }
   }
 
-  return arrs;
+  return datas;
 } // console.log(sort(datas));
 //
 // 快速排序
@@ -51,25 +51,26 @@ function sortSuper(arrs) {
     return arrs;
   }
 
-  var left = [],
-      right = [],
-      preIndex = Math.floor(arrs.length / 2),
-      prenum = arrs[preIndex];
+  var left = [];
+  var right = [];
+  var pre = Math.floor(arrs.length / 2);
+  var preItem = arrs[pre];
 
   for (var i = 0; i < arrs.length; i++) {
-    if (i === preIndex) {
+    if (i === pre) {
       continue;
     }
 
-    if (arrs[i] < prenum) {
+    if (arrs[i] < preItem) {
       left.push(arrs[i]);
     } else {
       right.push(arrs[i]);
     }
   }
 
-  return [].concat(_toConsumableArray(sortSuper(left)), [prenum], _toConsumableArray(sortSuper(right)));
+  return [].concat(_toConsumableArray(sortSuper(left)), [preItem], _toConsumableArray(sortSuper(right)));
 } // console.log(sortSuper(datas))
+// 写一个MAP函数
 
 
 function superMap(arrs, callback) {
@@ -80,24 +81,23 @@ function superMap(arrs, callback) {
   }
 
   return result;
-} // 写一个MAP函数
-
+}
 
 var ns = superMap([1, 2, 3, 4], function (item) {
   return item + "hhaha";
 }); // console.log(ns)
 
 var toSum = function toSum(nums, target) {
-  var maps = new Map();
+  var map = new Map();
 
   for (var i = 0; i < nums.length; i++) {
     var need = target - nums[i];
 
-    if (maps.has(need)) {
-      return [maps.get(need), i];
+    if (map.has(need)) {
+      return [map.get(need), i];
     }
 
-    maps.set(nums[i], i);
+    map.set(nums[i], i);
   }
 
   return null;
@@ -105,25 +105,26 @@ var toSum = function toSum(nums, target) {
 // 双指针 tosum
 
 
-function tosumleftright(args, target) {
-  var left = 0,
-      right = args.length - 1;
+function tosumleftright(arrs, target) {
+  var left = 0;
+  var right = arrs.length - 1;
 
-  while (left < right) {
-    var sum = args[left] + args[right];
+  while (left <= right) {
+    var sum = arrs[left] + arrs[right];
 
     if (sum === target) {
       return [left, right];
-    } else if (sum > target) {
-      right--;
-    } else {
+    } else if (sum < target) {
       left++;
+    } else {
+      right--;
     }
   }
 
-  return [];
-} // console.log(tosumleftright(nums,9))
+  return [left, right];
+}
 
+console.log(tosumleftright(nums, 9));
 
 function findTwo(arrs, target) {
   var left = 0,
@@ -142,6 +143,4 @@ function findTwo(arrs, target) {
   }
 
   return [left, right];
-}
-
-console.log(findTwo(nums, 9));
+} // console.log(findTwo(nums, 9));
