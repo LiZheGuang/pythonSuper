@@ -31,7 +31,7 @@ function lastData(arrs) {
 
 function sort(datas) {
   for (var i = 0; i < datas.length - 1; i++) {
-    for (var j = 0; j > datas.length - i - 1; j++) {
+    for (var j = 0; j < datas.length - i - 1; j++) {
       if (datas[j] > datas[j + 1]) {
         var temp = datas[j];
         datas[j] = datas[j + 1];
@@ -100,21 +100,21 @@ var toSum = function toSum(nums, target) {
     map.set(nums[i], i);
   }
 
-  return null;
+  return [];
 }; // console.log(toSum(nums, 13));
 // 双指针 tosum
 
 
-function tosumleftright(arrs, target) {
+function tosumleftright(nums, target) {
   var left = 0;
-  var right = arrs.length - 1;
+  var right = nums.length - 1;
 
   while (left <= right) {
-    var sum = arrs[left] + arrs[right];
+    var need = nums[left] + nums[right];
 
-    if (sum === target) {
+    if (target === need) {
       return [left, right];
-    } else if (sum < target) {
+    } else if (need < target) {
       left++;
     } else {
       right--;

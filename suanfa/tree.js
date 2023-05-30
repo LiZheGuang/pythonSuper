@@ -57,8 +57,8 @@ const data = [
 
 const arrsSpilit = [1, [2, [3, 4], 5], 6];
 
-function buildTree(arss,pid = 0){
-  return arss.filter(item=> item.pid == pid).map(item=>({...item,next:buildTree(arss,item.id)}))
+function buildTree(arrs,pid = 0){
+ return arrs.filter(item=>item.pid === pid).map(item=>({...item,next:buildTree(arrs,item.id)}))
 }
 
 

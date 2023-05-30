@@ -56,13 +56,13 @@ var data = [{
 }];
 var arrsSpilit = [1, [2, [3, 4], 5], 6];
 
-function buildTree(arss) {
+function buildTree(arrs) {
   var pid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  return arss.filter(function (item) {
-    return item.pid == pid;
+  return arrs.filter(function (item) {
+    return item.pid === pid;
   }).map(function (item) {
     return _objectSpread({}, item, {
-      next: buildTree(arss, item.id)
+      next: buildTree(arrs, item.id)
     });
   });
 }

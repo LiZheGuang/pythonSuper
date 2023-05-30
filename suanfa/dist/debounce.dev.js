@@ -1,10 +1,10 @@
 "use strict";
 
 function debounce(fn, wait) {
-  var times = null;
+  var times;
   return function () {
-    var context = this,
-        args = arguments;
+    var context = this;
+    var args = arguments;
 
     if (times) {
       clearTimeout(times);
@@ -12,7 +12,7 @@ function debounce(fn, wait) {
     }
 
     times = setTimeout(function () {
-      fn.apply(context, args);
+      fn.call(context, args);
     }, wait);
   };
 }

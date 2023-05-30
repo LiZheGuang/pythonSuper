@@ -1,15 +1,14 @@
 function debounce(fn, wait) {
-  let times = null;
+  let times;
   return function () {
-    let context = this,
-      args = arguments;
+    let context = this;
+    let args = arguments;
     if (times) {
       clearTimeout(times);
       times = null;
     }
-
-    times = setTimeout(() => {
-      fn.apply(context, args);
+    times = setTimeout(function () {
+      fn.call(context, args);
     }, wait);
   };
 }

@@ -20,7 +20,7 @@ function lastData(arrs) {
 // 冒泡
 function sort(datas) {
   for (let i = 0; i < datas.length - 1; i++) {
-    for (let j = 0; j > datas.length - i - 1; j++) {
+    for (let j = 0; j < datas.length - i - 1; j++) {
       if (datas[j] > datas[j + 1]) {
         let temp = datas[j];
         datas[j] = datas[j + 1];
@@ -80,32 +80,30 @@ var toSum = function (nums, target) {
     }
     map.set(nums[i], i);
   }
-  return null;
+  return [];
 };
 
 // console.log(toSum(nums, 13));
 
 // 双指针 tosum
 
-function tosumleftright(arrs, target) {
+function tosumleftright(nums, target) {
   let left = 0;
-  let right = arrs.length - 1;
-
+  let right = nums.length - 1;
   while (left <= right) {
-    
-    let sum = arrs[left] + arrs[right]
-    if(sum === target){
-      return [left ,right]
-    }else if(sum < target){
+    let need = nums[left] + nums[right];
+    if (target === need) {
+      return [left, right];
+    }else if(need < target){
       left++
     }else{
       right--
     }
   }
-  return [left,right];
+  return [left,right]
 }
 
-console.log(tosumleftright(nums,9))
+console.log(tosumleftright(nums, 9));
 
 function findTwo(arrs, target) {
   let left = 0,
