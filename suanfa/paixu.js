@@ -5,8 +5,8 @@ var nums = [2, 7, 11, 15]; //https://leetcode.cn/problems/two-sum/
 
 function lastData(arrs) {
   let left = 0;
-  let right = arrs.length - 1;
-  while (left < right) {
+  let right = arrs.length;
+  while (left <= right) {
     let temp = arrs[left];
     arrs[left] = arrs[right];
     arrs[right] = temp;
@@ -18,17 +18,17 @@ function lastData(arrs) {
 // console.log(lastData(datas));
 
 // 冒泡
-function sort(datas) {
-  for (let i = 0; i < datas.length - 1; i++) {
-    for (let j = 0; j < datas.length - i - 1; j++) {
-      if (datas[j] > datas[j + 1]) {
-        let temp = datas[j];
-        datas[j] = datas[j + 1];
-        datas[j + 1] = temp;
+function sort(arrs) {
+  for (let i = 0; i < arrs.length - 1; i++) {
+    for (let j = 0; j < arrs.length - i - 1; j++) {
+      if (arrs[j] > arrs[j + 1]) {
+        let temp = arrs[j];
+        arrs[j] = arrs[j + 1];
+        arrs[j + 1] = temp;
       }
     }
   }
-  return datas;
+  return arrs;
 }
 
 // console.log(sort(datas));
@@ -42,48 +42,48 @@ function sortSuper(arrs) {
   let left = [];
   let right = [];
   let pre = Math.floor(arrs.length / 2);
-  let preItem = arrs[pre];
+  let preData = arrs[pre];
   for (let i = 0; i < arrs.length; i++) {
     if (i === pre) {
       continue;
     }
-    if (arrs[i] < preItem) {
+    if (arrs[i] < preData) {
       left.push(arrs[i]);
     } else {
       right.push(arrs[i]);
     }
   }
-  return [...sortSuper(left), preItem, ...sortSuper(right)];
+  return [...sortSuper(left), preData, ...sortSuper(right)];
 }
 
 // console.log(sortSuper(datas))
 
 // 写一个MAP函数
 function superMap(arrs, callback) {
-  let result = [];
+  let resule = [];
   for (let i = 0; i < arrs.length; i++) {
-    result.push(callback(arrs[i], i));
+    resule.push(callback(arrs[i], i));
   }
-  return result;
+  return resule;
 }
 let ns = superMap([1, 2, 3, 4], function (item) {
   return item + "hhaha";
 });
 // console.log(ns)
 
-var toSum = function (nums, target) {
+function toSum(arrs, target) {
   let map = new Map();
-  for (let i = 0; i < nums.length; i++) {
-    let need = target - nums[i];
-    if (map.has(need)) {
-      return [map.get(need), i];
+  for (let i = 0; i < arrs.length; i++) {
+    let need = target - arrs[i]
+    if(map.has(need)){
+      return [map.get(need),i]
     }
-    map.set(nums[i], i);
+    map.set(arrs[i],i)
   }
   return [];
-};
+}
 
-// console.log(toSum(nums, 13));
+console.log(toSum(nums, 13));
 
 // 双指针 tosum
 
@@ -94,13 +94,13 @@ function tosumleftright(nums, target) {
     let need = nums[left] + nums[right];
     if (target === need) {
       return [left, right];
-    }else if(need < target){
-      left++
-    }else{
-      right--
+    } else if (need < target) {
+      left++;
+    } else {
+      right--;
     }
   }
-  return [left,right]
+  return [left, right];
 }
 
 console.log(tosumleftright(nums, 9));

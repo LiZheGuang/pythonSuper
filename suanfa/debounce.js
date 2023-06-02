@@ -7,7 +7,7 @@ function debounce(fn, wait) {
       clearTimeout(times);
       times = null;
     }
-    times = setTimeout(function () {
+    times = setTimeout(() => {
       fn.call(context, args);
     }, wait);
   };

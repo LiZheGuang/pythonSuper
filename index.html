@@ -5,7 +5,76 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>test javascript</title>
+    <style> 
+    .color{
+      width: 24px;
+      height: 24px;
+      border-radius: 100%;
+      display: inline-block;
+    }
+    .color1{
+      background-color: #FF7F50;
+    }
+    .color2{
+      background-color: #87CEEB;
+    }
+    .color3{
+      background-color: #8B0000;
+    }
+    .color4{
+      background-color: #4B0082;
+    }
+    .color5{
+      background-color: #9400D3;
+    }
+    .color6{
+      background-color: #00CED1;
+    }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <canvas id="color-picker" width="150" height="150"></canvas>
+    <div class="color1 color"></div>
+    <div class="color2 color"></div>
+    <div class="color3 color"></div>
+    <div class="color4 color"></div>
+    <div class="color5 color"></div>
+    <div class="color6 color"></div>
+  </body>
   <script type="module" src="./suanfa/test.js"></script>
+  <script>
+    var canvas = document.getElementById('color-picker');
+    var ctx = canvas.getContext('2d');
+    var centerX = canvas.width / 2;
+    var centerY = canvas.height / 2;
+    var radius = canvas.width / 2 - 20;
+    // 绘制圆形描边
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = '#333';
+    ctx.stroke();
+    for (var angle = 0; angle <= 360; angle += 1) {
+        var gradient = ctx.createRadialGradient(centerX, centerY, radius * 0.8, centerX, centerY, radius);
+        gradient.addColorStop(0, 'hsla(' + angle + ', 100%, 50%, 1)');
+        gradient.addColorStop(1, 'hsla(' + angle + ', 100%, 50%, 0)');
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, angle * Math.PI / 180, (angle + 1) * Math.PI / 180);
+        ctx.fillStyle = gradient;
+        ctx.fill();
+    }
+
+    canvas.addEventListener('click', function (event) {
+    var rect = canvas.getBoundingClientRect();
+    var x = event.clientX - rect.left;
+    var y = event.clientY - rect.top;
+    var data = ctx.getImageData(x, y, 1, 1).data;
+    var r = data[0];
+    var g = data[1];
+    var b = data[2];
+    var color = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+    console.log(color);
+});
+  </script>
 </html>

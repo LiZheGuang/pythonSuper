@@ -70,8 +70,8 @@ function buildTree(arrs) {
 console.log(buildTree(data, 0)); // reduce拍平多维数组
 
 function filterArrs(arrs) {
-  return arrs.reduce(function (last, val) {
-    return Array.isArray(val) ? last.concat(filterArrs(val)) : last.concat(val);
+  return arrs.reduce(function (pre, val) {
+    return Array.isArray(val) ? pre.concat(filterArrs(val)) : pre.concat(val);
   }, []);
 }
 

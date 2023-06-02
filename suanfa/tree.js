@@ -58,7 +58,7 @@ const data = [
 const arrsSpilit = [1, [2, [3, 4], 5], 6];
 
 function buildTree(arrs,pid = 0){
- return arrs.filter(item=>item.pid === pid).map(item=>({...item,next:buildTree(arrs,item.id)}))
+ return arrs.filter(item=>(item.pid === pid)).map(item=>({...item,next:buildTree(arrs,item.id)}))
 }
 
 
@@ -66,9 +66,9 @@ console.log(buildTree(data, 0));
 
 // reduce拍平多维数组
 function filterArrs(arrs) {
-  return arrs.reduce((last,val)=>{
-    return Array.isArray(val) ? last.concat(filterArrs(val)) : last.concat(val)
-  },[])
+return arrs.reduce((pre,val)=>{
+  return Array.isArray(val) ? pre.concat(filterArrs(val)) : pre.concat(val)
+},[])
 }
 
 console.log(filterArrs(arrsSpilit));

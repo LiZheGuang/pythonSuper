@@ -14,9 +14,9 @@ var nums = [2, 7, 11, 15]; //https://leetcode.cn/problems/two-sum/
 
 function lastData(arrs) {
   var left = 0;
-  var right = arrs.length - 1;
+  var right = arrs.length;
 
-  while (left < right) {
+  while (left <= right) {
     var temp = arrs[left];
     arrs[left] = arrs[right];
     arrs[right] = temp;
@@ -29,18 +29,18 @@ function lastData(arrs) {
 // 冒泡
 
 
-function sort(datas) {
-  for (var i = 0; i < datas.length - 1; i++) {
-    for (var j = 0; j < datas.length - i - 1; j++) {
-      if (datas[j] > datas[j + 1]) {
-        var temp = datas[j];
-        datas[j] = datas[j + 1];
-        datas[j + 1] = temp;
+function sort(arrs) {
+  for (var i = 0; i < arrs.length - 1; i++) {
+    for (var j = 0; j < arrs.length - i - 1; j++) {
+      if (arrs[j] > arrs[j + 1]) {
+        var temp = arrs[j];
+        arrs[j] = arrs[j + 1];
+        arrs[j + 1] = temp;
       }
     }
   }
 
-  return datas;
+  return arrs;
 } // console.log(sort(datas));
 //
 // 快速排序
@@ -54,56 +54,56 @@ function sortSuper(arrs) {
   var left = [];
   var right = [];
   var pre = Math.floor(arrs.length / 2);
-  var preItem = arrs[pre];
+  var preData = arrs[pre];
 
   for (var i = 0; i < arrs.length; i++) {
     if (i === pre) {
       continue;
     }
 
-    if (arrs[i] < preItem) {
+    if (arrs[i] < preData) {
       left.push(arrs[i]);
     } else {
       right.push(arrs[i]);
     }
   }
 
-  return [].concat(_toConsumableArray(sortSuper(left)), [preItem], _toConsumableArray(sortSuper(right)));
+  return [].concat(_toConsumableArray(sortSuper(left)), [preData], _toConsumableArray(sortSuper(right)));
 } // console.log(sortSuper(datas))
 // 写一个MAP函数
 
 
 function superMap(arrs, callback) {
-  var result = [];
+  var resule = [];
 
   for (var i = 0; i < arrs.length; i++) {
-    result.push(callback(arrs[i], i));
+    resule.push(callback(arrs[i], i));
   }
 
-  return result;
+  return resule;
 }
 
 var ns = superMap([1, 2, 3, 4], function (item) {
   return item + "hhaha";
 }); // console.log(ns)
 
-var toSum = function toSum(nums, target) {
+function toSum(arrs, target) {
   var map = new Map();
 
-  for (var i = 0; i < nums.length; i++) {
-    var need = target - nums[i];
+  for (var i = 0; i < arrs.length; i++) {
+    var need = target - arrs[i];
 
     if (map.has(need)) {
       return [map.get(need), i];
     }
 
-    map.set(nums[i], i);
+    map.set(arrs[i], i);
   }
 
   return [];
-}; // console.log(toSum(nums, 13));
-// 双指针 tosum
+}
 
+console.log(toSum(nums, 13)); // 双指针 tosum
 
 function tosumleftright(nums, target) {
   var left = 0;
