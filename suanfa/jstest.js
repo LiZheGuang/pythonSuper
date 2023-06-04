@@ -1,18 +1,18 @@
 // call
-Function.prototype.call2 = function (context, ...args) {
-  context = context || window;
+Function.prototype.call2 = function(context,...args){
+  context = context || window
   context.fn = this
-  let result = context.fn(...args)
+  let resule = context.fn(...args)
   delete context.fn
-  return result
-};
-
+  return resule
+}
 const obj = { name: "张三" };
 function sayHi(age, gender) {
   console.log(`我叫${this.name}，年龄：${age}，性别：${gender}`);
 }
 
-sayHi.call2(obj, 18, "男");
+sayHi.call2(obj, 18, "男"
+);
 
 // 每隔一秒输出1,2,3,4,5
 

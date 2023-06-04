@@ -11,10 +11,10 @@ Function.prototype.call2 = function (context) {
     args[_key - 1] = arguments[_key];
   }
 
-  var result = (_context = context).fn.apply(_context, args);
+  var resule = (_context = context).fn.apply(_context, args);
 
   delete context.fn;
-  return result;
+  return resule;
 };
 
 var obj = {

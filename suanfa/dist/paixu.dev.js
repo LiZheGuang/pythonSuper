@@ -12,19 +12,19 @@ var datas = [1, 2, 5, 4, 3, 8, 9, 0, 9, 9, 12]; // 两数之和练习
 
 var nums = [2, 7, 11, 15]; //https://leetcode.cn/problems/two-sum/
 
-function lastData(arrs) {
-  var left = 0;
-  var right = arrs.length;
+function lastData(args) {
+  var left = 0,
+      right = args.length - 1;
 
-  while (left <= right) {
-    var temp = arrs[left];
-    arrs[left] = arrs[right];
-    arrs[right] = temp;
+  while (left < right) {
+    var temp = args[left];
+    args[left] = args[right];
+    args[right] = temp;
     left++;
     right--;
   }
 
-  return arrs;
+  return args;
 } // console.log(lastData(datas));
 // 冒泡
 
@@ -51,24 +51,24 @@ function sortSuper(arrs) {
     return arrs;
   }
 
-  var left = [];
-  var right = [];
-  var pre = Math.floor(arrs.length / 2);
-  var preData = arrs[pre];
+  var left = [],
+      right = [],
+      pre = Math.floor(arrs.length / 2),
+      preNum = arrs[pre];
 
   for (var i = 0; i < arrs.length; i++) {
     if (i === pre) {
       continue;
     }
 
-    if (arrs[i] < preData) {
+    if (arrs[i] < preNum) {
       left.push(arrs[i]);
     } else {
       right.push(arrs[i]);
     }
   }
 
-  return [].concat(_toConsumableArray(sortSuper(left)), [preData], _toConsumableArray(sortSuper(right)));
+  return [].concat(_toConsumableArray(sortSuper(left)), [preNum], _toConsumableArray(sortSuper(right)));
 } // console.log(sortSuper(datas))
 // 写一个MAP函数
 
@@ -101,16 +101,16 @@ function toSum(arrs, target) {
   }
 
   return [];
-}
+} // console.log(toSum(nums, 13));
+// 双指针 tosum
 
-console.log(toSum(nums, 13)); // 双指针 tosum
 
-function tosumleftright(nums, target) {
-  var left = 0;
-  var right = nums.length - 1;
+function tosumleftright(arrs, target) {
+  var left = 0,
+      right = arrs.length - 1;
 
   while (left <= right) {
-    var need = nums[left] + nums[right];
+    var need = arrs[left] + arrs[right];
 
     if (target === need) {
       return [left, right];

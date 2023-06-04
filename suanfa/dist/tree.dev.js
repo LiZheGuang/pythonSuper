@@ -62,7 +62,7 @@ function buildTree(arrs) {
     return item.pid === pid;
   }).map(function (item) {
     return _objectSpread({}, item, {
-      next: buildTree(arrs, item.id)
+      chil: buildTree(arrs, item.id)
     });
   });
 }

@@ -2,22 +2,24 @@ var datas = [1, 2, 5, 4, 3, 8, 9, 0, 9, 9, 12];
 // 两数之和练习
 
 var nums = [2, 7, 11, 15]; //https://leetcode.cn/problems/two-sum/
+function lastData(args) {
+  let left = 0,
+    right = args.length - 1;
 
-function lastData(arrs) {
-  let left = 0;
-  let right = arrs.length;
-  while (left <= right) {
-    let temp = arrs[left];
-    arrs[left] = arrs[right];
-    arrs[right] = temp;
+  while (left < right) {
+    let temp = args[left];
+    args[left] = args[right];
+    args[right] = temp;
     left++;
     right--;
   }
-  return arrs;
+  return args;
 }
+
 // console.log(lastData(datas));
 
 // 冒泡
+
 function sort(arrs) {
   for (let i = 0; i < arrs.length - 1; i++) {
     for (let j = 0; j < arrs.length - i - 1; j++) {
@@ -39,21 +41,21 @@ function sortSuper(arrs) {
   if (arrs.length < 2) {
     return arrs;
   }
-  let left = [];
-  let right = [];
-  let pre = Math.floor(arrs.length / 2);
-  let preData = arrs[pre];
+  let left = [],
+    right = [],
+    pre = Math.floor(arrs.length / 2),
+    preNum = arrs[pre];
   for (let i = 0; i < arrs.length; i++) {
     if (i === pre) {
       continue;
     }
-    if (arrs[i] < preData) {
+    if (arrs[i] < preNum) {
       left.push(arrs[i]);
     } else {
       right.push(arrs[i]);
     }
   }
-  return [...sortSuper(left), preData, ...sortSuper(right)];
+  return [...sortSuper(left), preNum, ...sortSuper(right)];
 }
 
 // console.log(sortSuper(datas))
@@ -73,33 +75,35 @@ let ns = superMap([1, 2, 3, 4], function (item) {
 
 function toSum(arrs, target) {
   let map = new Map();
+
   for (let i = 0; i < arrs.length; i++) {
-    let need = target - arrs[i]
-    if(map.has(need)){
-      return [map.get(need),i]
+    let need = target - arrs[i];
+    if (map.has(need)) {
+      return [map.get(need), i];
     }
-    map.set(arrs[i],i)
+    map.set(arrs[i], i);
   }
   return [];
 }
 
-console.log(toSum(nums, 13));
+// console.log(toSum(nums, 13));
 
 // 双指针 tosum
 
-function tosumleftright(nums, target) {
-  let left = 0;
-  let right = nums.length - 1;
+function tosumleftright(arrs, target) {
+  let left = 0,
+    right = arrs.length - 1;
   while (left <= right) {
-    let need = nums[left] + nums[right];
-    if (target === need) {
-      return [left, right];
-    } else if (need < target) {
-      left++;
-    } else {
-      right--;
+    let need = arrs[left] + arrs[right];
+    if(target === need){
+      return [left,right]
+    }else if(need < target){
+      left++
+    }else{
+      right--
     }
   }
+
   return [left, right];
 }
 

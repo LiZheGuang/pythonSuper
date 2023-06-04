@@ -1,18 +1,17 @@
 function debounce(fn, wait) {
-  let times;
+  let time;
   return function () {
     let context = this;
     let args = arguments;
-    if (times) {
-      clearTimeout(times);
-      times = null;
+    if (time) {
+      clearTimeout(time);
+      time = null;
     }
-    times = setTimeout(() => {
+    time = setTimeout(function () {
       fn.call(context, args);
     }, wait);
   };
 }
-
 let s = debounce(function (nums) {
   console.log(this.haha);
   console.log(nums);
