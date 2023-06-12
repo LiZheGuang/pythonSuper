@@ -1,17 +1,17 @@
 "use strict";
 
 function debounce(fn, wait) {
-  var time;
+  var times;
   return function () {
     var context = this;
     var args = arguments;
 
-    if (time) {
-      clearTimeout(time);
-      time = null;
+    if (times) {
+      clearTimeout(times);
+      times = null;
     }
 
-    time = setTimeout(function () {
+    times = setTimeout(function () {
       fn.call(context, args);
     }, wait);
   };

@@ -1,5 +1,7 @@
 "use strict";
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 // call
 Function.prototype.call2 = function (context) {
   var _context;
@@ -11,10 +13,9 @@ Function.prototype.call2 = function (context) {
     args[_key - 1] = arguments[_key];
   }
 
-  var resule = (_context = context).fn.apply(_context, args);
+  var result = (_context = context).fn.apply(_context, args);
 
-  delete context.fn;
-  return resule;
+  return result;
 };
 
 var obj = {
@@ -47,23 +48,69 @@ function reduceArrs(arrs) {
   return arrs.reduce(function (pre, val) {
     return Array.isArray(val) ? pre.concat(reduceArrs(val)) : pre.concat(val);
   }, []);
+} // console.log(reduceArrs(duowei_arrs));
+// Promise.all
+
+
+function promiseAll(promises) {
+  return new Promise(function (resolve, reject) {
+    var reusle = [];
+    var commitNum = 0;
+    var len = promises.length;
+    promises.map(function (promise, index) {
+      promise.then(function (res) {
+        reusle[index] = res;
+        commitNum++;
+        console.log(commitNum, len);
+
+        if (commitNum === len) {
+          resolve(reusle);
+        }
+      })["catch"](function (err) {
+        return reject(err);
+      });
+    });
+  });
 }
 
-console.log(reduceArrs(duowei_arrs));
+var p1 = new Promise(function (resolve, reject) {
+  setTimeout(function () {
+    resolve(1);
+  }, 1000);
+});
+var p2 = new Promise(function (resolve, reject) {
+  setTimeout(function () {
+    resolve(2);
+  }, 1000);
+});
+var p3 = new Promise(function (resolve, reject) {
+  setTimeout(function () {
+    resolve(3);
+  }, 500);
+}); // promiseAll([p3, p1, p2]).then(res=>console.log(res))
+// new 操作符实现
 
-function debounce(fn, wait) {
-  var times = null;
-  return function () {
-    var context = this;
-    var args = arguments;
+function myNew(fn) {
+  // 创建一个新的对象，该对象继承构造函数的原型。
+  var obj = Object.create(fn.prototype); // 调用构造函数，并将新对象作为函数的上下文（即this关键字）。
 
-    if (times) {
-      clearTimeout(times);
-      times = null;
-    }
+  for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+    args[_key2 - 1] = arguments[_key2];
+  }
 
-    times = setTimeout(function () {
-      fn.call(context, args);
-    }, wait);
-  };
+  var result = fn.apply(obj, args);
+
+  if (_typeof(result) === "object" && result !== null) {
+    return result;
+  } else {
+    return obj;
+  }
 }
+
+function new_demo_super(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+var newtext = myNew(new_demo_super, 'John', 23);
+console.log(newtext, 'tee');
